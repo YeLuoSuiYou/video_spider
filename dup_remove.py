@@ -21,7 +21,7 @@ transform = transforms.Compose(
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # model = torch.hub.load("facebookresearch/dino:main", "dino_vitb8")
-torch.hub.set_dir("/liujinxiu/ye/models/torch_hub")
+# torch.hub.set_dir("/liujinxiu/ye/models/torch_hub")
 model = torch.hub.load("facebookresearch/dinov2", "dinov2_vitb14")
 model.eval().cuda()
 
