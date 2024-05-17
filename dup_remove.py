@@ -71,7 +71,9 @@ def image_dedup_reg(image_path, out_path):
 def process_folder(video_no):
     image_path = save_path + "/" + video_no
     out_path = output_path + "/" + video_no
-    os.makedirs(out_path, exist_ok=True)
+    if os.path.exists(out_path):
+        return
+    os.makedirs(out_path)
     try:
         image_dedup_reg(image_path, out_path)
         # print("Finished Video: " + video_no)
