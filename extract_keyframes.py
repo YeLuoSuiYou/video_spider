@@ -1,13 +1,9 @@
-import concurrent.futures
-import json
 import os
-import pickle
-import subprocess
 
-import cv2
 from tqdm import tqdm
 
 import decord
+import imageio
 
 
 class VideoReaderWrapper(decord.VideoReader):
@@ -47,11 +43,19 @@ def save_i_keyframes(video_fn, v_id, s_path):
             hours = minutes // 60
             minutes = minutes % 60
         # timestamp of the keyframe
-        frame_time = str(int(hours)) + "-" + str(int(minutes)) + "-" + str(int(seconds)) + "-" + str(int(millisecond))
+        frame_time = (
+            str(int(hours))
+            + "-"
+            + str(int(minutes))
+            + "-"
+            + str(int(seconds))
+            + "-"
+            + str(int(millisecond))
+        )
         # Save the image
         outname = str(v_id) + "_keyframe_" + str(frame_time) + ".jpg"
         save_name = s_path + "/" + outname
-        cv2.imwrite(save_name, keyframe)
+        imageio.imwrite(save_name, keyframe)
     # release the video reader
     del decord_vr, keyframes, i_frames, milliseconds
 
